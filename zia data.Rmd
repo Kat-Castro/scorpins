@@ -1,0 +1,62 @@
+---
+title: "Zia's data"
+author: "Kathleen"
+date: "2023-02-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(tidyverse)
+require(tigerstats)
+mydata <- read.csv(file="zia data.csv")
+mydata$Scorpion_ID <- as.factor(mydata$Scorpion_ID)
+
+```
+
+#   Analysis of NumProbes
+```{r}
+boxplot(NumProbes~Scorpion_ID,data=mydata)
+```
+  
+The scorpion_ID with a lower temperature looks to have a higher rate in the Number of Probes compared to the higher temperature of the scorpion_ID where it consists a lower Number of Probes. 
+  
+Numerical Data
+```{r}
+favstats(NumProbes~Scorpion_ID,data=mydata)
+```
+    
+Results with a higher temperature carries a lower median of 6.0 compared to the lower temperature where it's medium consists of 17.5. Taking a closer look at the average amount of probes for the higher temperature carries the number 6.5 while the average amount of probes located in the lower temperature is 23.5.
+  
+Inferential Data
+```{r}
+t.test(NumProbes~Scorpion_ID,data=mydata)
+```
+In conclusion, the difference between the two recordings of data differentiated by temperature carry a large difference. Where the lower temperature requires a larger amount of probing compared to scorpions in a higher temperature. This statement can be proven through the three data charts showing the differences.
+
+#   Analysis of TimeSting
+
+```{r}
+boxplot(TimeSting~Scorpion_ID,data=mydata)
+```
+  
+Looking at the provided data, it appears that the scorpion took more time in trying to sting when presented at a lower temperature. When presented at a higher temperature, it took less time for the stings to occur.
+  
+Numerical Data
+```{r}
+favstats(TimeSting~Scorpion_ID,data=mydata)
+```
+  
+Looking at the presented data, scorpions stuck in a higher temperature have a median of 7.2 and a mean of 11.03792. Comparing this to the other scorpion stuck in a lower temperature where the median consists of 25.2 and a mean of 34.42917.
+  
+  Inferential Data
+```{r}
+t.test(TimeSting~Scorpion_ID,data=mydata,conf.level=.99)
+```
+  
+During a 90% confidence level, the difference between the scorpions within different temperatures. Now comparing the data to having the confidence level raised to 99%, the amount of confidence intervals change in a small amount.
+
+
